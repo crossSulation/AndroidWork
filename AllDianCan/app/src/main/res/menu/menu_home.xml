@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".HomeActivity">
+      <item android:id="@+id/profile"
+            android:title="@string/action_profile"
+            android:orderInCategory="10"
+            android:icon="@drawable/action_profile"
+            android:menuCategory="container"
+            app:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:orderInCategory="1"
+          android:icon="@drawable/action_setting"
+          app:showAsAction="never"/>
+</menu>
