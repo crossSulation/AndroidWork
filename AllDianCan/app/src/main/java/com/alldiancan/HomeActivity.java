@@ -1,5 +1,6 @@
 package com.alldiancan;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -18,6 +19,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ActionBar actionBar =getActionBar();
+        actionBar.hide();
         initView();
     }
 
