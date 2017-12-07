@@ -4,8 +4,11 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.zip.Inflater;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -38,6 +41,11 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        //????tab
+        mTabLayout.addTab(mTabLayout.newTab().setCustomView(LayoutInflater.from(this).inflate(R.layout.bottom_menu_firtpage, mTabLayout)));
+        mTabLayout.addTab(mTabLayout.newTab().setCustomView(LayoutInflater.from(this).inflate(R.layout.bottom_menu_shoppingcar,mTabLayout)));
+        mTabLayout.addTab(mTabLayout.newTab().setCustomView(LayoutInflater.from(this).inflate(R.layout.bottom_menu_discovery,mTabLayout)));
+        mTabLayout.addTab(mTabLayout.newTab().setCustomView(LayoutInflater.from(this).inflate(R.layout.bottom_menu_aboutme,mTabLayout)));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

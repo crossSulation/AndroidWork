@@ -4,4 +4,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_profile">Profile</string>
+    <string name="contact">联系人</string>
+    <string name="resaddress">商铺地址</string>
+    <string name="dialnumber">联系方式</string>
+    <string name ="firstpage">首页</string>
+    <string name="shoppingcar">购物车</string>
+    <string name="disnew">发现</string>
+    <string name ="aboutme">我</string>
 </resources>
