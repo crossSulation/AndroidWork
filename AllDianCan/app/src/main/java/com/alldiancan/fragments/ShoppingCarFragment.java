@@ -1,28 +1,24 @@
 package com.alldiancan.fragments;
 
-import android.support.v4.app.Fragment;
+
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alldiancan.R;
+
 /**
  * Created by laliu on 12/6/2017.
  */
 public class ShoppingCarFragment extends Fragment {
-    private String from;
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        super.onCreateView(inflater,container, savedInstanceState);
+        View view =inflater.inflate(R.layout.shopping_car_fragment,container);
+        return  view;
     }
 
     @Override
@@ -55,9 +51,4 @@ public class ShoppingCarFragment extends Fragment {
         super.onStop();
     }
 
-    public static  ShoppingCarFragment newInstance(String from) {
-        ShoppingCarFragment shoppingCarFragment =new ShoppingCarFragment();
-        shoppingCarFragment.setFrom(from);
-        return  shoppingCarFragment;
-    }
 }
