@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initView() {
         mTabLayout = (TabLayout)findViewById(R.id.bottom_layout);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#0c3fce"));
         resources =this.getResources();
          mFragments =new ArrayList<Fragment>();
         mFragments.add(HomeFragment.newInstance());
