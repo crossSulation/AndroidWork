@@ -4,9 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/aboutme_txt"
         android:text="AboutMeFragment"/>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

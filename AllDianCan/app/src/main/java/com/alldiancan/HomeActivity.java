@@ -11,16 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.alldiancan.fragments.AboutMeFragment;
 import com.alldiancan.fragments.HomeFragment;
 import com.alldiancan.fragments.HotFragment;
 import com.alldiancan.fragments.ShoppingCarFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class HomeActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
-    private Fragment []mFragments;
+    private List<Fragment> mFragments;
     private Resources resources ;
     private final String  HOME_FRAGMENT_TAG ="home";
     private final String  SHOPPING_FRAGMENT_TAG ="shopping";
@@ -38,53 +42,48 @@ public class HomeActivity extends AppCompatActivity {
     private void initView() {
         mTabLayout = (TabLayout)findViewById(R.id.bottom_layout);
         resources =this.getResources();
-
+         mFragments =new ArrayList<Fragment>();
+        mFragments.add(HomeFragment.newInstance());
+        mFragments.add(ShoppingCarFragment.newInstance());
+        mFragments.add(HotFragment.newInstance());
+        mFragments.add(AboutMeFragment.newInstance());
+        final FragmentManager fragmentManager = getFragmentManager();
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            final FragmentManager fragmentManager = getFragmentManager();
-            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     // first page
                     case 0:
-                        if(fragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG)!=null) {
-                            fragmentTransaction.add(R.id.fragment_container, fragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG));
-                        }else {
-                            HomeFragment homeFragment = new HomeFragment();
-                            fragmentTransaction.add(R.id.fragment_container, homeFragment);
-                        }
-                        fragmentTransaction.commit();
+                        hidenFragment(fragmentManager,SHOPPING_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,DISCOVERY_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,ABOUTME_FRAGMENT_TAG);
+                        Fragment homeFragment = mFragments.get(0);
+                        addFragment(R.id.fragment_container,homeFragment,fragmentManager,HOME_FRAGMENT_TAG);
                         break;
                     //shopping car
                     case 1:
-                        if(fragmentManager.findFragmentByTag(SHOPPING_FRAGMENT_TAG)!=null) {
-                            fragmentTransaction.add(R.id.fragment_container, fragmentManager.findFragmentByTag(SHOPPING_FRAGMENT_TAG));
-                        }else {
-                            ShoppingCarFragment shoppingCarFragment = new ShoppingCarFragment();
-                            fragmentTransaction.add(R.id.fragment_container, shoppingCarFragment);
-                        }
-                        fragmentTransaction.commit();
+                        hidenFragment(fragmentManager,HOME_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,DISCOVERY_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,ABOUTME_FRAGMENT_TAG);
+                        Fragment shoppingCarFragment = mFragments.get(1);
+                        addFragment(R.id.fragment_container,shoppingCarFragment,fragmentManager,SHOPPING_FRAGMENT_TAG);
                         break;
                     //discovery
                     case 2:
-                        if(fragmentManager.findFragmentByTag(DISCOVERY_FRAGMENT_TAG)!=null) {
-                            fragmentTransaction.add(R.id.fragment_container, fragmentManager.findFragmentByTag(DISCOVERY_FRAGMENT_TAG));
-                        }else {
-                            HotFragment hotFragment = new HotFragment();
-                            fragmentTransaction.add(R.id.fragment_container, hotFragment);
-                        }
-                        fragmentTransaction.commit();
+                        hidenFragment(fragmentManager,SHOPPING_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,HOME_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,ABOUTME_FRAGMENT_TAG);
+                        Fragment discoveryFragment = mFragments.get(2);
+                        addFragment(R.id.fragment_container,discoveryFragment,fragmentManager,DISCOVERY_FRAGMENT_TAG);
                         break;
                     //about me
                     case 3:
-                        if(fragmentManager.findFragmentByTag(ABOUTME_FRAGMENT_TAG)!=null) {
-                            fragmentTransaction.add(R.id.fragment_container, fragmentManager.findFragmentByTag(ABOUTME_FRAGMENT_TAG));
-                        }else {
-                            AboutMeFragment aboutmeFragment = new AboutMeFragment();
-                            fragmentTransaction.add(R.id.fragment_container, aboutmeFragment);
-                        }
-                        fragmentTransaction.commit();
+                        hidenFragment(fragmentManager,SHOPPING_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,DISCOVERY_FRAGMENT_TAG);
+                        hidenFragment(fragmentManager,HOME_FRAGMENT_TAG);
+                        Fragment aboutMeFragment = mFragments.get(3);
+                        addFragment(R.id.fragment_container,aboutMeFragment,fragmentManager,ABOUTME_FRAGMENT_TAG);
                         break;
 
                 }
@@ -105,6 +104,24 @@ public class HomeActivity extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setCustomView(R.layout.bottom_menu_shoppingcar).setTag(SHOPPING_FRAGMENT_TAG).setText(R.string.shoppingcar).setIcon(R.drawable.bottom_action_shoping));
         mTabLayout.addTab(mTabLayout.newTab().setCustomView(R.layout.bottom_menu_discovery).setTag(DISCOVERY_FRAGMENT_TAG).setText(R.string.disnew).setIcon(R.drawable.bottom_action_discovery));
         mTabLayout.addTab(mTabLayout.newTab().setCustomView(R.layout.bottom_menu_aboutme).setTag(ABOUTME_FRAGMENT_TAG).setText(R.string.aboutme).setIcon(R.drawable.action_profile));
+    }
+
+    private void  hidenFragment(FragmentManager fragmentManager,String tag) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment f = fragmentManager.findFragmentByTag(tag);
+        if(f!=null) {
+            fragmentTransaction.hide(f);
+            fragmentTransaction.commit();
+        }
+    }
+    private void addFragment(int containerResourceId,Fragment fragment,FragmentManager fragmentManager,String tag) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(fragment.isAdded() && fragment.isHidden()) {
+            fragmentTransaction.show(fragment);
+        }else {
+            fragmentTransaction.add(containerResourceId,fragment,tag);
+        }
+        fragmentTransaction.commit();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -4,9 +4,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
+        android:id="@+id/shoppingcar_txt"
         android:text="ShoppingCar Fragment"/>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

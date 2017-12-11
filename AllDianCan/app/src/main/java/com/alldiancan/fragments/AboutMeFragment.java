@@ -51,4 +51,9 @@ public class AboutMeFragment extends Fragment {
         super.onStop();
     }
 
+    public static AboutMeFragment newInstance() {
+        AboutMeFragment aboutMeFragment = new AboutMeFragment();
+        return aboutMeFragment;
+    }
+
 }

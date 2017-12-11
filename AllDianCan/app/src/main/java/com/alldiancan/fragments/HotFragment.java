@@ -53,4 +53,8 @@ public class HotFragment extends Fragment {
         super.onStop();
     }
 
+    public  static HotFragment newInstance() {
+        HotFragment hotFragment =new HotFragment();
+        return hotFragment;
+    }
 }

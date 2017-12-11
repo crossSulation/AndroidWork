@@ -7,12 +7,12 @@
     android:layout_width="80dp"
     android:id="@+id/item_img"
     android:layout_alignParentLeft="true"
-    android:layout_height="80dp"/>
+    android:layout_height="100dp"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:layout_toEndOf="@+id/item_img"
         android:layout_alignParentTop="true"
         android:layout_alignBottom="@+id/item_img"
@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:text="@string/resaddress"
             android:id="@+id/address"
-            android:paddingTop="10dp"
             android:layout_weight="0.19"/>
 
         <TextView
@@ -31,15 +30,16 @@
             android:layout_height="wrap_content"
             android:text="@string/contact"
             android:id="@+id/contact"
-            android:paddingTop="10dp"
             android:layout_weight="0.19"/>
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dialnumber"
-            android:id="@+id/dialnumber"
-            android:paddingTop="10dp"
-            android:layout_weight="0.19"/>
+            android:id="@+id/dialnumber" />
+        <RatingBar
+            android:id="@+id/ratingBar_prefer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.19" />
     </LinearLayout>
 </RelativeLayout>

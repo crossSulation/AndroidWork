@@ -1,19 +1,21 @@
 package com.alldiancan.models;
 
+import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 
 /**
  * Created by laliu on 12/7/2017.
  * ??????
  */
 public class RestoBasicInfo {
-    private Image imginfo;
+    private Uri imginfo;
     private String contact;
     private String dialnumber;
     private String restoAddress;
     private int  ranks;
 
-    public RestoBasicInfo(String contact, String dialnumber, Image imginfo, String restoAddress, int ranks) {
+    public RestoBasicInfo(String contact, String dialnumber, Uri imginfo, String restoAddress, int ranks) {
         this.contact = contact;
         this.dialnumber = dialnumber;
         this.imginfo = imginfo;
@@ -45,11 +47,11 @@ public class RestoBasicInfo {
         this.dialnumber = dialnumber;
     }
 
-    public Image getImginfo() {
+    public Uri getImginfo() {
         return imginfo;
     }
 
-    public void setImginfo(Image imginfo) {
+    public void setImginfo(Uri imginfo) {
         this.imginfo = imginfo;
     }
 

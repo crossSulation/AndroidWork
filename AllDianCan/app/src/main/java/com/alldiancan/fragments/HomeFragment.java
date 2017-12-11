@@ -25,4 +25,8 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public static HomeFragment newInstance() {
+        HomeFragment homeFragment =new HomeFragment();
+        return  homeFragment;
+    }
 }
