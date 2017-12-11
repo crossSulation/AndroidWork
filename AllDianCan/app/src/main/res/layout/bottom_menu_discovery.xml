@@ -8,12 +8,14 @@
         android:id="@+id/discovery_icon"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/bottom_action_discovery"
-        android:layout_marginTop="10dp"
-        android:layout_height="30dp"/>
+        android:layout_marginTop="1dp"
+        android:layout_height="25dp"/>
     <TextView
         android:layout_width="match_parent"
         android:id="@+id/discovery_txt"
+        android:gravity="center_horizontal"
         android:text="@string/disnew"
+        android:textSize="@dimen/abc_text_size_small_material"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
