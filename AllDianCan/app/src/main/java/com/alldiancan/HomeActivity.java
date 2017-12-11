@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initView() {
         mTabLayout = (TabLayout)findViewById(R.id.bottom_layout);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         resources =this.getResources();
          mFragments =new ArrayList<Fragment>();
         mFragments.add(HomeFragment.newInstance());
