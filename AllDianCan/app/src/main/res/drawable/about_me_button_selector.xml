@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- normal-->
+    <item android:drawable="@drawable/action_profile">
+    </item>
+    <!-- ative-->
+    <item
+        android:state_activated="true"
+        android:drawable="@drawable/action_profile">
+    </item>
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/action_profile">
+    </item>
+    <!-- hover-->
+    <item android:state_hovered="true"
+          android:drawable="@drawable/action_profile">
+    </item>
+</selector>
