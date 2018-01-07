@@ -17,6 +17,19 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <div class="my-container">
+      <h2 v-if="!canSee">{{ myword }}</h2>
+      <button @click="sayGood">SayGood</button>
+    </div>
+    <el-rate v-model="value3" show-text></el-rate>
+    <div class="block">
+  <span class="demonstration">有默认值</span>
+  <el-color-picker v-model="color1"></el-color-picker>
+</div>
+<div class="block">
+  <span class="demonstration">无默认值</span>
+  <el-color-picker v-model="color2"></el-color-picker>
+</div>
   </div>
 </template>
 
@@ -25,15 +38,26 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      myword: 'fuck you, jerk',
+      canSee: true,
+      value3: null,
+      color1: '#409EFF',
+      color2: null
+    }
+  },
+  methods: {
+    sayGood () {
+      alert('good day')
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
+<style lang="less" scoped>
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
@@ -46,5 +70,11 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.hello {
+  .my-container {
+    color: green;
+  }
 }
 </style>
