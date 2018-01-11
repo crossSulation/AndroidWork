@@ -1,57 +1,88 @@
 package com.alldiancan.utils;
 
-import android.os.AsyncTask;
+import android.util.Log;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Locale;
 
+import okhttp3.Cache;
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
+public  class HttpCallBackEnd<T> implements HttpRestCallRepository<T> {
 
-/**
- * Created by laliu on 12/7/2017.
- */
-public class HttpCallBackEnd extends AsyncTask<Object,Object,Object> {
-    private final String domain ="http://rest-service.guides.spring.io/";
-    private List<Object> retCollections;
-    @Override
-    protected Object doInBackground(Object... params) {
-        RestTemplate restTemplate =new RestTemplate();
-        retCollections = new ArrayList<Object>();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        for(Object objType :params) {
-            String tmpurl =domain.concat(objType.getClass().getSimpleName());
+    private String callUrl;
+    private HashMap<String,String> headers;
+    private HashMap<String,Object> params;
+    private RequestBody requestbody;
 
-            Object retObj= restTemplate.getForObject(tmpurl, objType.getClass());
+    private OkHttpClient okHttpClient =new OkHttpClient();
 
-            retCollections.add(retObj);
+    public HttpCallBackEnd() {
+
+        if(okHttpClient==null) {
+            okHttpClient =new OkHttpClient();
         }
-        return retCollections;
     }
 
     @Override
-    protected void onCancelled() {
-        super.onCancelled();
+    public T deleteRequest(String url, HashMap headers, HashMap params) throws Exception {
+
+        return request(url,"DELETE",headers,params,null);
     }
 
     @Override
-    protected void onCancelled(Object o) {
-        super.onCancelled(o);
+    public T getRequest(String url, HashMap headers, HashMap params) throws Exception {
+
+        return request(url,"GET",headers,params,null);
     }
 
     @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
+    public T PostRequest(String url, HashMap headers, HashMap params, RequestBody requestBody) throws Exception {
+
+        return request(url,"POST",headers,params,requestBody);
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    public T putReqquest(String url, HashMap headers, HashMap params, RequestBody requestBody) throws Exception {
+
+        return request(url,"PUT",headers,params,requestBody);
     }
 
     @Override
-    protected void onProgressUpdate(Object[] values) {
-        super.onProgressUpdate(values);
+    public T request(String url, String method, HashMap headers, HashMap params, RequestBody requestBody) throws Exception {
+        this.callUrl =url;
+        this.headers =headers;
+        this.params =params;
+        this.requestbody =requestBody;
+        OkHttpClient.Builder builder = okHttpClient.newBuilder();
+        Request request = new Request.Builder()
+                .url(url)
+                .headers(Headers.of(headers))
+                .addHeader("accept-language", Locale.getDefault().getLanguage() + '-' + Locale.getDefault().getCountry())
+                .addHeader("content-type","application/json")
+                .method(method, requestBody)
+                .build();
+        builder.cache(new Cache(new File("httpcache.json"), 50));
+        Response response;
+        ResponseBody responseBody;
+        try {
+            response = builder.build().newCall(request).execute();
+            if(response.isSuccessful()) {
+                responseBody= response.body();
+               String retJsonstr= responseBody.string();
+               return (T)JsonConverter.converToPOJOFromPlainTxt(retJsonstr, Type.class);
+            }
+        }catch (IOException e) {
+            Log.i("ERR",e.getMessage());
+        }
+        return  null;
     }
 }

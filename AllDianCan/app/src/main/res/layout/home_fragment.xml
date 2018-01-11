@@ -10,6 +10,7 @@
         android:id="@+id/home_txt"
         android:text="HomeFragment"/>
     <include
+        android:id="@+id/recommend_list"
         layout="@layout/recommend_list_items"
         style="@style/liststyle"
         >

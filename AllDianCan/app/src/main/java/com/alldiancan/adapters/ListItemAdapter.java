@@ -1,8 +1,6 @@
 package com.alldiancan.adapters;
 
 import android.content.Context;
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.alldiancan.R;
-import com.alldiancan.models.RestoBasicInfo;
+import com.alldiancan.models.Restaurant;
 
 import java.util.List;
 
@@ -21,16 +19,16 @@ import java.util.List;
  */
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
     private Context context;
-    private List<RestoBasicInfo> restoBasicInfos;
-    public ListItemAdapter(Context context,List<RestoBasicInfo> restoBasicInfos) {
+    private List<Restaurant> restaurants;
+    public ListItemAdapter(Context context,List<Restaurant> restaurants) {
         super();
         this.context =context;
-        this.restoBasicInfos =restoBasicInfos;
+        this.restaurants = restaurants;
     }
 
     @Override
     public int getItemCount() {
-        return restoBasicInfos.size();
+        return restaurants.size();
     }
 
     @Override
@@ -57,16 +55,16 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder> {
     public ListItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(this.context).inflate(R.layout.list_item,viewGroup,false);
         ImageView imageView = (ImageView) view.findViewById(R.id.item_img);
-        imageView.setImageURI(restoBasicInfos.get(i).getImginfo());
+        imageView.setImageURI(restaurants.get(i).getImginfo());
         TextView address =(TextView) view.findViewById(R.id.address);
-        address.setText(restoBasicInfos.get(i).getRestoAddress());
+        address.setText(restaurants.get(i).getRestoAddress());
         TextView contactor =(TextView)view.findViewById(R.id.contact);
-        contactor.setText(restoBasicInfos.get(i).getContact());
+        contactor.setText(restaurants.get(i).getContact());
         TextView dialnumber =(TextView)view.findViewById(R.id.dialnumber);
-        dialnumber.setText(restoBasicInfos.get(i).getDialnumber());
+        dialnumber.setText(restaurants.get(i).getDialnumber());
         RatingBar ratingBar =(RatingBar)view.findViewById(R.id.ratingBar_prefer);
         ratingBar.setMax(5);
-        ratingBar.setNumStars(restoBasicInfos.get(i).getRanks());
+        ratingBar.setNumStars(restaurants.get(i).getRanks());
         ListItemViewHolder listItemViewHolder = new ListItemViewHolder(view);
         return  listItemViewHolder;
     }
