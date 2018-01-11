@@ -70,7 +70,7 @@ public  class HttpCallBackEnd<T> implements HttpRestCallRepository<T> {
                 .addHeader("content-type","application/json")
                 .method(method, requestBody)
                 .build();
-        builder.cache(new Cache(new File("httpcache.json"), 50));
+        builder.cache(new Cache(new File("httpcache.tmp"), 10 * 1024 * 1024));
         Response response;
         ResponseBody responseBody;
         try {
